@@ -1,0 +1,55 @@
+<html>
+<head>
+    <meta charset="utf-8">
+    <title>二进制转十进制计算器</title>
+</head>
+<body>
+<input id="bin">
+<button onclick="BinToDec()">提交</button> 
+<p id = "reply"></p>
+</body>
+
+<script>
+//检验是否二进制数
+function IsBin(t1){
+    //拆分形成数组
+    var array = t1.toString().split("");
+    var j=0;
+    //通过判断是否都是0或1来确认是否二进制数
+    for(i=0;i<array.length;i++){
+        if(array[i]==="0"){
+            j++;            
+        }
+        else if(array[i]==="1"){
+            j++;              
+        }
+        else {
+            break;
+        }
+    }
+    if(j===array.length){
+        return true
+    }else{return false}
+}
+//计算器本体
+function BinToDec(){
+    t = Number(document.getElementById("bin").value);
+    j = 0;
+    //if里判断是否正整数且是否二进制数
+    if(Number.isInteger(t)&&IsBin(t)){
+        //转换成数组并倒序排列
+        array = t.toString().split("").reverse();
+        //算法核心，请百度搜索二进制如何转十进制数
+        for(i=0;i<array.length;i++){
+            j = j + Number(array[i])*Math.pow(2,i);
+        }
+    }
+    //如果不是正整数或不是二进制数，报错
+    else{document.getElementById("reply").innerHTML = "请输入二进制数！";
+    return;    
+    }
+    document.getElementById("reply").innerHTML = "二进制数" + t +"转换为十进制数是" + j;
+   }
+</script>    
+ 
+            </html>
